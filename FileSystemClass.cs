@@ -9,6 +9,8 @@ using log4net;
 using PlasticDrive.Writable.Tree;
 using PlasticDrive.Writable.Virtual;
 using PlasticDrive.Writable.WkTree;
+using System.Collections.Generic;
+
 
 namespace PlasticDrive.Writable
 {
