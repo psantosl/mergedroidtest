@@ -33,6 +33,7 @@ namespace PlasticDrive.Writable
             WorkspaceLocalFiles tempStorage,
             VirtualFiles virtualFiles)
         {
+            // modified on master
             mWorkspaceContent = content;
             mChangesTreeOperations = new ChangesTreeOperations(content);
             mLocalFilesPath = cachePath;
