@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
 using System.IO;
 using System.Threading;
@@ -10,7 +9,9 @@ using log4net;
 using PlasticDrive.Writable.Tree;
 using PlasticDrive.Writable.Virtual;
 using PlasticDrive.Writable.WkTree;
-using System.Reflection;
+using System.Collections.Generic;
+using System.Configuration;
+
 
 namespace PlasticDrive.Writable
 {
@@ -23,25 +24,6 @@ namespace PlasticDrive.Writable
                 return;
 
             ThreadPool.QueueUserWorkItem(ChangeSelector, newSelector);
-        }
-
-        internal PlasticFileSystem(
-            WorkspaceContent content,
-            string cachePath,
-            PlasticAPI plasticApi,
-            FileHandles handles,
-            WorkspaceLocalFiles tempStorage,
-            VirtualFiles virtualFiles)
-        {
-            // modified on master
-            mWorkspaceContent = content;
-            mChangesTreeOperations = new ChangesTreeOperations(content);
-            mLocalFilesPath = cachePath;
-            mFileCache = new FileCache(mLocalFilesPath);
-            mPlasticApi = plasticApi;
-            mHandles = handles;
-            mLocalFiles = tempStorage;
-            mVirtualFiles = virtualFiles;
         }
 
         internal WorkspaceContent GetWorkspaceContent()
@@ -159,6 +141,27 @@ namespace PlasticDrive.Writable
         {
             mHandles.CloseAll();
             mLocalFiles.Close();
+        }
+
+        internal PlasticFileSystem(
+            WorkspaceContent content,
+            string cachePath,
+            PlasticAPI plasticApi,
+            FileHandles handles,
+            WorkspaceLocalFiles tempStorage,
+            VirtualFiles virtualFiles)
+        {
+            // modified on master
+            mWorkspaceContent = content;
+            mChangesTreeOperations = new ChangesTreeOperations(content);
+            mLocalFilesPath = cachePath;
+            mFileCache = new FileCache(mLocalFilesPath);
+            mPlasticApi = plasticApi;
+            mHandles = handles;
+            mLocalFiles = tempStorage;
+            mVirtualFiles = virtualFiles;
+
+            // added on branch
         }
 
         int DokanOperations.CreateFile(
@@ -946,3 +949,4 @@ namespace PlasticDrive.Writable
         static readonly ILog mLog = LogManager.GetLogger("PlasticFileSystem");
     }
 }
+using System.Reflection;
