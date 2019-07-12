@@ -151,6 +151,7 @@ namespace PlasticDrive.Writable
             WorkspaceLocalFiles tempStorage,
             VirtualFiles virtualFiles)
         {
+            // modified on master
             mWorkspaceContent = content;
             mChangesTreeOperations = new ChangesTreeOperations(content);
             mLocalFilesPath = cachePath;
@@ -948,3 +949,4 @@ namespace PlasticDrive.Writable
         static readonly ILog mLog = LogManager.GetLogger("PlasticFileSystem");
     }
 }
+using System.Reflection;
