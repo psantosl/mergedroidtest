@@ -39,6 +39,7 @@ namespace PlasticDrive.Writable
             mHandles = handles;
             mLocalFiles = tempStorage;
             mVirtualFiles = virtualFiles;
+            // modified on my branch
         }
 
         internal WorkspaceContent GetWorkspaceContent()
