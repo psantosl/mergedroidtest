@@ -25,25 +25,6 @@ namespace PlasticDrive.Writable
             ThreadPool.QueueUserWorkItem(ChangeSelector, newSelector);
         }
 
-        internal PlasticFileSystem(
-            WorkspaceContent content,
-            string cachePath,
-            PlasticAPI plasticApi,
-            FileHandles handles,
-            WorkspaceLocalFiles tempStorage,
-            VirtualFiles virtualFiles)
-        {
-            // modified on master
-            mWorkspaceContent = content;
-            mChangesTreeOperations = new ChangesTreeOperations(content);
-            mLocalFilesPath = cachePath;
-            mFileCache = new FileCache(mLocalFilesPath);
-            mPlasticApi = plasticApi;
-            mHandles = handles;
-            mLocalFiles = tempStorage;
-            mVirtualFiles = virtualFiles;
-        }
-
         internal WorkspaceContent GetWorkspaceContent()
         {
             lock (this)
@@ -159,6 +140,26 @@ namespace PlasticDrive.Writable
         {
             mHandles.CloseAll();
             mLocalFiles.Close();
+        }
+
+        internal PlasticFileSystem(
+            WorkspaceContent content,
+            string cachePath,
+            PlasticAPI plasticApi,
+            FileHandles handles,
+            WorkspaceLocalFiles tempStorage,
+            VirtualFiles virtualFiles)
+        {
+            // modified on master
+            mWorkspaceContent = content;
+            mChangesTreeOperations = new ChangesTreeOperations(content);
+            mLocalFilesPath = cachePath;
+            mFileCache = new FileCache(mLocalFilesPath);
+            mPlasticApi = plasticApi;
+            mHandles = handles;
+            mLocalFiles = tempStorage;
+            mVirtualFiles = virtualFiles;
+            // modified on my branch
         }
 
         int DokanOperations.CreateFile(
